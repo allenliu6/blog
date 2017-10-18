@@ -21,20 +21,28 @@
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+  import Vue, {ComponentOptions} from 'vue'
+    export default {
+      name: 'hello',
+      data() {
+        return {
+          msg: 'this is a typescript project now'
+        }
+      }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="postcss">
+:root{
+  --maincolor: red;
+}
+
 h1, h2 {
   font-weight: normal;
+  color: var(--maincolor);
+  box-shadow: 0 2px 3px;
+  transform: translate3d(10px, 20px, 30px);
 }
 
 ul {

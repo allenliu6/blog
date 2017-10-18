@@ -10,6 +10,10 @@ module.exports = {
       : config.dev.cssSourceMap,
     extract: isProduction
   }),
+  postcss: [
+    require('postcss-cssnext'),
+    require('cssnano'),
+  ],
   transformToRequire: {
     video: 'src',
     source: 'src',

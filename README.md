@@ -2,6 +2,8 @@
 
 > allen's blog supported by vue2.5
 
+vue2.5(typescript) postcss vue-router vuex 
+
 ## Build Setup
 
 ``` bash
