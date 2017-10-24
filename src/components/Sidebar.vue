@@ -51,7 +51,7 @@
     aside{
         
         & section{
-            width: 5rem;
+            width: 3rem;
             padding: 50px 10px 300px;
             position: fixed;
             top: 0;
@@ -59,7 +59,7 @@
             bottom: 0;
             color: #efefef;
             background: url('../assets/bg2.jpg') center no-repeat;
-            -webkit-filter: saturate(0.7) drop-shadow(2px 2px 2px #333);
+            -webkit-filter: saturate(0.7);
             display: flex;
             flex-direction: column;
             justify-content: space-around;
@@ -100,5 +100,11 @@
 
     .slide-fade-enter, .slide-fade-leave-active {
         transform: translateX(-10px);
+    }
+
+    @media (width <= 768px) {
+        aside{
+            display: none;
+        }
     }
 </style>

@@ -42,7 +42,7 @@
         align-items: center;
 
         & .toggle_line{
-            border: 2px solid #333;
+            border: 2px solid #fff;
             width: 24px;
         }
     }

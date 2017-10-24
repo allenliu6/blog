@@ -8,7 +8,6 @@ Vue.use(Vuex)
 
 const state = {
     sidebar: true,
-    mobile: false
 }
 
 const store = new Vuex.Store({

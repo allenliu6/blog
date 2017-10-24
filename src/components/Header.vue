@@ -2,7 +2,7 @@
     <header>
         <transition name="slide-fade">
             <nav class="header_nav">
-                <ul>
+                <ul class="header_nav-list">
                     <li>主页</li>
                     <li>归档</li>
                     <li>分类</li>
@@ -11,72 +11,46 @@
                     <li>友链</li>
                     <li>搜索</li>
                 </ul>
-                <h3>Allen's Blog</h3>
+                <h2 class="header_nav-title">Allen's Blog</h2>
             </nav>
         </transition>
     </header>
 </template>
 
-<<script>
-    import {mapGetters} from 'vuex'
+<script>
 
     export default{
-        computed: {
-            ...mapGetters({
-                mobile: 'mobile'
-            })
-        },
-        created(){
-            let timer = true,
-                that = this
-
-            this.resize()
-            window.onresize = function(){
-                if (timer) {
-                    that.resize()
-                    timer = false
-                    timer = setTimeout(function() {
-                        timer = true
-                    }, 500)
-                }
-            }
-        },
-        methods: {
-            resize(){
-                if(window.innerWidth > 900 && this.mobile){
-                    this.$store.dispatch('updataMobile', false)
-                }else if(window.innerWidth <= 900 && !this.mobile){
-                    this.$store.dispatch('updataMobile', true)
-                }
-            }
-        }
+        
     }
 </script>
 
 <style lang="postcss" scoped>
 
     header{
-        width: 11rem;
-        font-size: 0.2rem;
-        margin: 0 auto;
-
+        
         & .header_nav{
+            width: 15rem;
             display: flex;
-            align-items: center;
+            align-items: space-around;
             flex-direction: row-reverse;
+            background-image: linear-gradient(to right, #1a6ec5, #21ccff);
+            margin: 0;
 
-            & ul{
+            & .header_nav-list{
                 display: flex;
                 justify-content: space-around;
-                margin-left: 50px;
+                margin-right: 30px;
 
                 & li{
-                    padding: 10px;
+                    height: 60px;
+                    line-height: 60px;
+                    margin-right: 20px;
                 }
             }
 
-            & h3{
-                padding: 10px;
+            & .header_nav-title{
+                margin-right: 50px;
+                line-height: 60px;
             }
         }
 
@@ -87,17 +61,23 @@
         }
     }
 
-@media (width <= 900px){
+@media (width <= 768px){
     header{
 
         & .header_nav{
-            flex-direction: column;
+            flex-direction: column-reverse;
 
-            & ul{
+            & .header_nav-list{
                 flex-direction: column;
-                position: fixed;
-                right: 40px;
-                top: 0;
+                border-top: solid 1px #85e1fd;
+                margin: 0;
+                
+                & li{
+                    color: #fff;
+                    height: 30px;
+                    line-height: 30px;
+                    margin-left: 30px;
+                }
             }
         }
     }
