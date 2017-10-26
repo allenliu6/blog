@@ -2,7 +2,8 @@
     <header>
         <transition name="slide-fade">
             <nav class="header_nav">
-                <ul class="header_nav-list">
+                <b-button @postListShow="postListShow" class="header_nav-button"></b-button>
+                <ul v-show="listShow" class="header_nav-list">
                     <li>主页</li>
                     <li>归档</li>
                     <li>分类</li>
@@ -18,71 +19,93 @@
 </template>
 
 <script>
-
-    export default{
-        
+import bButton from './button.vue'
+export default {
+    data(){
+        return {
+            listShow: true
+        }
+    },
+    components: {
+        bButton
+    },
+    methods: {
+        postListShow(bool){
+            this.listShow = bool
+        }
     }
+}
 </script>
 
 <style lang="postcss" scoped>
+header {
 
-    header{
-        
-        & .header_nav{
-            width: 15rem;
+    & .header_nav {
+        width: 100%;
+        display: flex;
+        align-items: space-around;
+        flex-direction: row-reverse;
+        background-image: linear-gradient(to right, #1a6ec5, #21ccff);
+
+        & .header_nav-button {
+            display: none;
+        }
+
+        & .header_nav-list {
             display: flex;
-            align-items: space-around;
-            flex-direction: row-reverse;
-            background-image: linear-gradient(to right, #1a6ec5, #21ccff);
-            margin: 0;
+            justify-content: space-around;
+            margin-right: 30px;
 
-            & .header_nav-list{
-                display: flex;
-                justify-content: space-around;
-                margin-right: 30px;
-
-                & li{
-                    height: 60px;
-                    line-height: 60px;
-                    margin-right: 20px;
-                }
-            }
-
-            & .header_nav-title{
-                margin-right: 50px;
-                line-height: 60px;
+            & li {
+                height: 50px;
+                line-height: 50px;
+                margin-right: 20px;
             }
         }
 
-        & .header_toggle{
-            position: fixed;
-            right: 5px;
-            top: 5px;
+        & .header_nav-title {
+            margin-right: 50px;
+            line-height: 50px;
         }
     }
 
-@media (width <= 768px){
-    header{
+    & .header_toggle {
+        position: fixed;
+        right: 5px;
+        top: 5px;
+    }
+}
 
-        & .header_nav{
+@media (width <=768px) {
+    header {
+
+        & .header_nav {
             flex-direction: column-reverse;
 
-            & .header_nav-list{
+            & .header_nav-list {
                 flex-direction: column;
                 border-top: solid 1px #85e1fd;
                 margin: 0;
-                
-                & li{
+
+                & li {
                     color: #fff;
                     height: 30px;
                     line-height: 30px;
                     margin-left: 30px;
                 }
             }
+
+            & .header_nav-button {
+                display: inline;
+                position: absolute;
+                right: 10px;
+                top: 10px;
+            }
         }
     }
 
-    .slide-fade-enter, .slide-fade-leave-active {
+    .slide-fade-enter,
+    .slide-fade-leave-active {
         transform: translateX(10px);
     }
 }
