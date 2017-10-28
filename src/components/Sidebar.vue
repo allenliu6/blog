@@ -1,7 +1,7 @@
 <template>
     <aside>
         <transition name="slide-fade">
-            <section v-if="show">
+            <section class="side" v-show="isShow">
                 <img src="../assets/avatar.png" alt="博主头像" class="side_avatar">
                 <div>
                     <h3 class="side_name">Allen</h3>
@@ -19,7 +19,7 @@
                 </ul>
             </section>
         </transition>
-        <b-popup class="side_toggle" :fatherName="'Sidebar'" :status="show"></b-popup>
+        <b-popup @postSideShow="postSideShow" class="side_toggle" :status="isShow"></b-popup>
     </aside>
 </template>
 
@@ -28,15 +28,15 @@
     export default {
         data(){
             return {
-                
+                isShow: true
             }
         },
         components: {
             bPopup
         },
-        computed: {
-            show(){
-                return this.$store.getters.sidebar
+        methods: {
+            postSideShow(bool){
+                this.isShow = bool
             }
         }
     }
@@ -50,7 +50,7 @@
 
     aside{
         
-        & section{
+        & .side{
             width: 3rem;
             padding: 50px 10px 300px;
             position: fixed;
@@ -93,13 +93,17 @@
 
         & .side_toggle{
             position: fixed;
-            left: 30px;
+            left: 50px;
             bottom: 50px;
         }
     }
 
-    .slide-fade-enter, .slide-fade-leave-active {
-        transform: translateX(-10px);
+    
+    .slide-fade-enter-active, .slide-fade-leave-active {
+        transition: opacity .5s
+    }
+    .slide-fade-enter, .slide-fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+        opacity: 0
     }
 
     @media (width <= 768px) {

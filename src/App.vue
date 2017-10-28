@@ -33,9 +33,12 @@ export default {
 
 
 /* reset */
-body{
+html,body{
   margin: 0;
   font-size: 16px;
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
 }
 ul{
   list-style: none;

@@ -1,20 +1,20 @@
 <template>
     <header>
-        <transition name="slide-fade">
             <nav class="header_nav">
                 <b-button @postListShow="postListShow" class="header_nav-button"></b-button>
-                <ul v-show="listShow" class="header_nav-list">
-                    <li>主页</li>
-                    <li>归档</li>
-                    <li>分类</li>
-                    <li>关于</li>
-                    <li>作品</li>
-                    <li>友链</li>
-                    <li>搜索</li>
-                </ul>
+                <transition name="slide-fade">
+                    <ul v-show="listShow" class="header_nav-list">
+                        <li>主页</li>
+                        <li>归档</li>
+                        <li>分类</li>
+                        <li>关于</li>
+                        <li>作品</li>
+                        <li>友链</li>
+                        <li>搜索</li>
+                    </ul>
+                 </transition>
                 <h2 class="header_nav-title">Allen's Blog</h2>
             </nav>
-        </transition>
     </header>
 </template>
 
@@ -104,9 +104,11 @@ header {
         }
     }
 
-    .slide-fade-enter,
-    .slide-fade-leave-active {
-        transform: translateX(10px);
+    .slide-fade-enter-active, .slide-fade-leave-active {
+        transition: opacity .5s;
+    }
+    .slide-fade-enter, .slide-fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+        opacity: 0;
     }
 }
 </style>

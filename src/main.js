@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router/index'
 import store from './store/index'
+import mock from './mock'
 
 Vue.config.productionTip = false
 
@@ -12,3 +13,5 @@ new Vue({
   store,
   render: h => h(App)
 })
+
+mock()

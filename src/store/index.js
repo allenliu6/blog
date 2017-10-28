@@ -7,7 +7,7 @@ import Vue from 'vue'
 Vue.use(Vuex)
 
 const state = {
-    sidebar: true,
+	
 }
 
 const store = new Vuex.Store({
