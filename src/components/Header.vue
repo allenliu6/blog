@@ -3,15 +3,15 @@
             <nav class="header_nav">
                 <b-button @postListShow="postListShow" class="header_nav-button"></b-button>
                 <transition name="slide-fade">
-                    <ul v-show="listShow" class="header_nav-list">
-                        <li>主页</li>
-                        <li>归档</li>
-                        <li>分类</li>
-                        <li>关于</li>
-                        <li>作品</li>
-                        <li>友链</li>
-                        <li>搜索</li>
-                    </ul>
+                    <nav v-show="listShow" class="header_nav-list">
+                        <a href="javascript: void(0)">归档</a>
+                        <a href="javascript: void(0)">主页</a>
+                        <a href="javascript: void(0)">分类</a>
+                        <a href="javascript: void(0)">关于</a>
+                        <a href="javascript: void(0)">作品</a>
+                        <a href="javascript: void(0)">友链</a>
+                        <a href="javascript: void(0)">搜索</a>
+                    </nav>
                  </transition>
                 <h2 class="header_nav-title">Allen's Blog</h2>
             </nav>
@@ -52,14 +52,14 @@ header {
         }
 
         & .header_nav-list {
-            display: flex;
-            justify-content: space-around;
+            display: table;
             margin-right: 30px;
 
-            & li {
+            & a {
+                display: table-cell;
                 height: 50px;
                 line-height: 50px;
-                margin-right: 20px;
+                padding: 0 1em;
             }
         }
 
