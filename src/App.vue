@@ -20,6 +20,11 @@ export default {
 </script>
 
 <style>
+@import url('./assets/font-awesome.css');
+.fa{
+  margin-right: 5px;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -38,7 +43,6 @@ html,body{
   font-size: 16px;
   width: 100%;
   height: 100%;
-  background: #f5f5f5;
 }
 ul{
   list-style: none;

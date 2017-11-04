@@ -7,19 +7,15 @@
                     <h3 class="side_name">Allen</h3>
                     <p class="side_sign"><i>不会弹吉他的师范生不是好前端</i></p>
                 </div>
-                <ul class="side_link-content">
-                    <li><a href="">日志</a></li> 
-                    <li><a href="">分类</a></li> 
-                </ul>
                 <ul class="side_link-social">
-                    <li><a href="">GitHub</a></li>
-                    <li><a href="">Twitter</a></li>
-                    <li><a href="">Facebook</a></li>
-                    <li><a href="">WeChat</a></li>
+                    <li><i class="fa fa-github"></i><a href="">GitHub</a></li>
+                    <li><i class="fa fa-twitter"></i><a href="">Twitter</a></li>
+                    <li><i class="fa fa-facebook"></i><a href="">Facebook</a></li>
+                    <li><i class="fa fa-wechat"></i><a href="">WeChat</a></li>
                 </ul>
             </section>
         </transition>
-        <b-popup @postSideShow="postSideShow" class="side_toggle" :status="isShow"></b-popup>
+        <b-popup @postSideShow="postSideShow" class="toggle" :status="isShow"></b-popup>
     </aside>
 </template>
 
@@ -48,54 +44,40 @@
         font-weight: bold;
     }
 
-    aside{
-        
-        & .side{
-            width: 3rem;
-            padding: 50px 10px 300px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            color: #efefef;
-            background: url('../assets/bg2.jpg') center no-repeat;
-            -webkit-filter: saturate(0.7);
+    .side{
+        width: 2.8rem;
+        padding: 50px 0.1rem 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        color: #efefef;
+        background: url('../assets/bg2.jpg') center no-repeat;
+        -webkit-filter: saturate(0.7);
+
+        & img{
+            width: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+
+        & .side_link-social{
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
+            font-size:16px;
+            margin-top: 30px;
 
-            & img{
-                width: 1.5rem;
-                margin-bottom: 20px;
-            }
-
-            & .side_link-content{
-                display: flex;
-                font-size:18px;
-                margin: 20px 0;
-
-                & li{
-                    padding: 5px;
-                }
-            }
-
-            & .side_link-social{
-                display: flex;
-                flex-direction: column;
-                font-size:16px;
-
-                & li{
-                    padding: 5px;
-                }
+            & li{
+                padding: 5px;
+                text-align: center;
             }
         }
+    }
 
-        & .side_toggle{
-            position: fixed;
-            left: 50px;
-            bottom: 50px;
-        }
+    .toggle{
+        position: fixed;
+        left: 50px;
+        bottom: 50px;
     }
 
     

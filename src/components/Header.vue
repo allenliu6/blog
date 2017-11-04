@@ -49,7 +49,7 @@ export default {
 
     & .header_nav-list {
         display: flex;
-        margin: 0 30px 0 50px;
+        margin: 0 1.2rem;
 
         & a {
             height: 50px;
