@@ -29,16 +29,28 @@
                 </span>
             </div>
         </section>
+        <nav class="pagination">
+            <a href="" class="pagination_next">下一页 »</a>
+            <div class="center">
+                <a href="/archive" class="">博客归档</a>
+            </div>
+        </nav>
+        <b-footer></b-footer>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import bFooter from '../components/footer'
+
 export default {
     data() {
         return {
             topics: []
         }
+    },
+    components: {
+        bFooter
     },
     created() {
         let self = this
@@ -61,33 +73,46 @@ export default {
     height: 100%;
     padding: 0 50px;
 
+    & a {
+        color: #2479CC;
+    }
+
     & .topics {
         text-align: left;
         padding: 40px 0;
         border-bottom: 1px solid #ddd;
 
-        & .topics_title{
+        & .topics_title {
             line-height: 35px;
             font-weight: 600;
             margin-bottom: 30px;
         }
 
-        & .topics_more-link{
-            color: #2479CC;
-            display: block;
-            margin: 20px 0 40px 0;
+        & .topics_more {
+            margin: 20px 0 30px 0;
         }
 
-        & .topics_foot{
+        & .topics_foot {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
         }
     }
+
+    & .pagination {
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        line-height: 20px;
+        padding: 20px 0;
+
+        & .pagination_next {
+            float: right;
+        }
+    }
 }
 
-@media (width <= 768px) {
-    .content{
+@media (width <=768px) {
+    .content {
         margin: 0;
     }
 }

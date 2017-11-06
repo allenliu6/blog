@@ -2,7 +2,7 @@
 
 > allen's blog supported by vue2.5
 
-vue2.5(typescript) postcss vue-router vuex 
+vue2.5(typescript) vue-router vuex vue-cli postcss axios marked mockjs font-awesome koa
 
 ## 阶段一  
 目标：实现静态博客页面
@@ -10,8 +10,8 @@ vue2.5(typescript) postcss vue-router vuex
 1. 简单页面，首页、详情页，包含三大部分header  sidebar  content
 2. 响应式布局和动画过渡效果
     - 暂时只一个断点  768
-    - REM  初始化时JS确定REM大小，单位统一REM
-    - 过渡效果暂时只做简单平移消失
+    - REM  初始化时JS确定REM大小，单位统一REM   字体使用em
+    - 过渡效果暂时只做简单平移消失  动画最后补充
 3. 
 
 
