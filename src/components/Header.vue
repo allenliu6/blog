@@ -82,7 +82,8 @@ export default {
                 color: #fff;
                 height: 30px;
                 line-height: 30px;
-                margin-left: 30px;
+                margin-left: 10px;
+                text-align: left;
             }
         }
 

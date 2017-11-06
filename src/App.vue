@@ -26,16 +26,12 @@ export default {
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue",Arial,"Hiragino Sans GB",STHeiti,"Microsoft YaHei";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
-
-/* responsive layout */
-
-
 
 /* reset */
 html,body{
@@ -61,5 +57,12 @@ h1,h2,h3,h4,h5,h6{
 }
 input,textarea{
   outline: none;
+}
+
+/* responsive layout */
+@media (width <= 768px) {
+    body{
+      font-size: 20px;
+    } 
 }
 </style>

@@ -2,7 +2,7 @@
     <div class="content">
         <section class="topics" v-for="topic in topics">
             <h1 class="topics_title">
-                {{topic.title}}
+                <a href="">{{topic.title}}</a>
             </h1>
             <p class="topics_summary">
                 {{topic.summary}}
@@ -31,8 +31,8 @@
         </section>
         <nav class="pagination">
             <a href="" class="pagination_next">下一页 »</a>
-            <div class="center">
-                <a href="/archive" class="">博客归档</a>
+            <div class="pagination_timeline">
+                <a href="">博客归档</a>
             </div>
         </nav>
         <b-footer></b-footer>
@@ -72,7 +72,7 @@ export default {
     margin-left: 3rem;
     height: 100%;
     padding: 0 50px;
-
+    
     & a {
         color: #2479CC;
     }
@@ -84,12 +84,20 @@ export default {
 
         & .topics_title {
             line-height: 35px;
-            font-weight: 600;
             margin-bottom: 30px;
+
+            & a{
+                color: #333;
+                font-size: 1.3em;
+                font-weight: 300;
+            }
         }
 
         & .topics_more {
             margin: 20px 0 30px 0;
+        }
+
+        & .topics_summary, & .topics_more{
         }
 
         & .topics_foot {
@@ -100,10 +108,15 @@ export default {
     }
 
     & .pagination {
-        text-align: center;
         border-bottom: 1px solid #ddd;
         line-height: 20px;
         padding: 20px 0;
+
+        & .pagination_timeline{
+            margin: auto;
+            width: 100px;
+            text-align: center;
+        }
 
         & .pagination_next {
             float: right;
