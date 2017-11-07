@@ -33,6 +33,16 @@ export default {
   color: #2c3e50;
 }
 
+/* postcss common css */
+.clearFloat::after {
+    content: ' ';
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+}
+
+
 /* reset */
 html,body{
   margin: 0;
