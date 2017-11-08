@@ -31,5 +31,6 @@
     .footer{
         line-height: 1.8;
         padding: 15px 0;
+        text-align: center;
     }
 </style>

@@ -13,6 +13,19 @@ module.exports = {
   postcss: [
     require('postcss-cssnext'),
     require('cssnano'),
+    require('postcss-bem')({
+      defaultNamespace: undefined,
+      style: 'bem',
+      separators: {
+        'descendent': '__',
+        'modifier': '--'
+      },
+      shortcuts: {
+        'component': 'b',
+        'descendent': 'e',
+        'modifier': 'm'
+      }
+    })
   ],
   transformToRequire: {
     video: 'src',

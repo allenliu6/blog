@@ -2,19 +2,24 @@
   <div id="app">
     <b-header></b-header>
     <b-sidebar></b-sidebar>
-    <router-view/>
+    <div class="content">
+      <router-view/>
+      <b-footer></b-footer>
+    </div>
   </div>
 </template>
 
 <script>
 import bSidebar from './components/Sidebar'
 import bHeader from './components/Header'
+import bFooter from './components/footer'
 
 export default {
   name: 'app',
   components: {
       bSidebar,
-      bHeader
+      bHeader,
+      bFooter
   }
 }
 </script>
@@ -31,6 +36,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.content {
+    margin-left: 3rem;
+    height: 100%;
+    padding: 30px 50px;
+    text-align: left;
+
+    @media (width <=768px) {
+        margin: 0;
+    }
 }
 
 /* postcss common css */
@@ -67,6 +83,22 @@ h1,h2,h3,h4,h5,h6{
 }
 input,textarea{
   outline: none;
+  resize: none;
+  box-shadow: none;
+  border: 1px solid #ddd;
+  transition: border .3s;
+  border-radius: 4px;
+}
+
+button{
+    appearance: none;
+    background-color: #2479cc;
+    color: #fff;
+    border-radius: 2px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color .3s;
 }
 
 /* responsive layout */
