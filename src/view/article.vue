@@ -15,42 +15,50 @@
             <div class="comments_title">Comments</div>
             <div class="comments_box">
                 <img class="comments_box-avatar" src="../assets/default-avatar.e30559a.svg" alt="默认头像">
-                <textarea @focus="this.isSumbitBoxShow = !this.isSumbitBoxShow" class="comments_box-textarea" placeholder="说说你的看法"></textarea>
-                <div v-if="isSumbitBoxShow" class="submit-box">
-                    <span class="submit-text">Ctrl or ⌘ + Enter</span>
-                    <button class="submit-btn">评论</button>
-                </div>
+                <textarea @focus="isSumbitBoxShow = true" @blur="isSumbitBoxShow = false" class="comments_box-textarea" placeholder="说说你的看法"></textarea>
+                <transition name="slide-fade">
+                    <div v-if="isSumbitBoxShow" class="submit-box">
+                        <span class="submit-text">Ctrl or ⌘ + Enter</span>
+                        <button class="submit-btn">评论</button>
+                    </div>
+                </transition>
             </div>
             <ul>
-                <li class="comments_content" v-for="comment in article.comments">
+                <li class="comments_content" v-for="(comment, index) in article.comments">
                     <img class="comments_content-avatar" :src="comment.avatar" alt="avatar">
                     <div class="comments_content-detail">
                         <a href="" class="detail_title">{{comment.name}}</a>
                         <p class="detail_content">{{comment.content}}</p>
                         <div class="detail_foot">
                             <i class="fa fa-comment-o"></i>
-                            <a href="" class="detail_foot-reply">{{comment.reply.length}}条评论</a>
+                            <a @click="setShow(index)" class="detail_foot-reply">
+                                <span v-if="!comment.isShow">{{comment.reply.length}}条评论</span>
+                                <span v-else>收起评论</span>
+                            </a>
                             <span class="detail_foot-date">{{comment.date | timeToNow}}</span>
                         </div>
-                        <div class="detail_reply">
-                            <div class="reply_arrow"></div>
-                            <ul>
-                                <li v-for="reply in comment.reply">
-                                    <img :src="reply.avatar" alt="" class="reply_avatar">
-                                    <div class="reply_content">
-                                        <a href="" class="content_title">{{comment.name}}</a>
-                                        <p class="content_detail">{{comment.content}}</p>
-                                        <div class="content_date">
-                                            {{comment.date | timeToNow}}
+                        <transition name="slide-fade">
+                            <div v-if="comment.isShow" class="detail_reply">
+                                <div class="reply_arrow"></div>
+                                <ul>
+                                    <li v-for="(reply, index2) in comment.reply">
+                                        <img :src="reply.avatar" alt="" class="reply_avatar">
+                                        <div class="reply_content">
+                                            <a href="" class="content_title">{{reply.name}}</a>
+                                            <p class="content_detail">{{reply.content}}</p>
+                                            <div class="content_date">
+                                                {{reply.date | timeToNow}}
+                                                <span class="content_reply" @click="setInputReply(index, index2)">回复</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <form class="reply_submit">
-                                <input class="submit_input" type="text" placeholder="输入评论">
-                                <button class="submit-btn">评论</button>
-                            </form>
-                        </div>
+                                    </li>
+                                </ul>
+                                <form class="reply_submit">
+                                    <input class="submit_input" type="text" :placeholder="comment.replyInput">
+                                    <button class="submit-btn">评论</button>
+                                </form>
+                            </div>
+                        </transition>
                     </div>
                 </li>
             </ul>
@@ -75,12 +83,27 @@ export default {
     created() {
         axios.get('./article')
             .then((response) => {
+                response.data.comments.forEach((item) => {
+                    item.isShow = false
+                    item.replyInput = '输入评论'
+                })
                 console.log(response.data)
                 this.article = response.data
             })
             .catch((error) => {
                 console.log(error)
             })
+    },
+    methods: {
+        setShow(index){
+            let comment = this.article.comments[index]
+            comment.isShow = !comment.isShow
+        },
+        setInputReply(index, index2){
+            let comment = this.article.comments[index]
+            comment.replyInput = `回复 ${comment.reply[index2].name} ：`
+            console.log(comment)
+        }
     }
 }
 </script>
@@ -243,6 +266,7 @@ button:hover{
                 & .detail_foot-reply {
                     color: #909090;
                     margin-right: 10px;
+                    cursor: pointer;
                 }
 
                 & .detail_foot-date {
@@ -309,9 +333,19 @@ button:hover{
                         }
 
                         & .content_date {
-                            font-size: 0.9em;
+                            font-size: 0.8em;
                             font-weight: 150;
                             color: #909090;
+
+                            & .content_reply{
+                                margin-left: 10px;
+                                color: #909090;
+                                cursor: pointer;
+                            }
+
+                            & .content_reply:hover{
+                                color: #2479CC;
+                            }
                         }
                     }
                 }
@@ -342,4 +376,18 @@ button:hover{
         }
     }
 }
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+    transition: opacity .5s;
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to
+/* .fade-leave-active in below version 2.1.8 */
+
+{
+    opacity: 0;
+}
+
 </style>
