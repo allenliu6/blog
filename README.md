@@ -2,7 +2,7 @@
 
 > allen's blog supported by vue2.5
 
-vue2.5(typescript) vue-router vuex vue-cli postcss axios marked mockjs font-awesome koa
+vue2.5(typescript) vue-router vuex（暂时不用） vue-cli postcss axios marked mockjs font-awesome koa
 
 ## 阶段一  
 目标：实现静态博客页面

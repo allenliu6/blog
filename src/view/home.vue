@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import contentHeader from '../components/content-header'
 
 export default {
@@ -33,7 +32,7 @@ export default {
     },
     created() {
         let self = this
-        axios.get('./topics')
+        this.$http.get('./topics')
             .then((response) => {
                 console.log(response.data);
                 this.topics = response.data.topics

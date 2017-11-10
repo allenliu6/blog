@@ -66,7 +66,6 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
 import contentHeader from '../components/content-header'
 
 export default {
@@ -81,7 +80,7 @@ export default {
         contentHeader
     },
     created() {
-        axios.get('./article')
+        this.$http.get('./article')
             .then((response) => {
                 response.data.comments.forEach((item) => {
                     item.isShow = false
