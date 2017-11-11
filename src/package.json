@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "vue-class-component": "^6.1.0",
+    "vue-property-decorator": "^6.0.0"
+  }
+}

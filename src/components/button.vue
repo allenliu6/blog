@@ -5,7 +5,7 @@
         <span class="btn_bar"></span>
     </button>
 </template>
-<script>
+<script  lang="ts">
 export default {
     name: "button",
     data() {

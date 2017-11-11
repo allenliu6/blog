@@ -16,7 +16,7 @@
     </header>
 </template>
 
-<script>
+<script  lang="ts">
 import bButton from './button.vue'
 export default {
     data() {

@@ -13,7 +13,7 @@
         <a target="_blank" href="https://github.com/koajs/koa">Koa2</a>
     </footer>
 </template>
-<script>
+<script  lang="ts">
    export default {
        name: "footer",
        data () {

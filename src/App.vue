@@ -9,10 +9,10 @@
   </div>
 </template>
 
-<script>
-import bSidebar from './components/Sidebar'
-import bHeader from './components/Header'
-import bFooter from './components/footer'
+<script lang="ts">
+import bSidebar from './components/Sidebar.vue'
+import bHeader from './components/Header.vue'
+import bFooter from './components/footer.vue'
 
 export default {
   name: 'app',

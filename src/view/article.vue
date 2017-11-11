@@ -65,8 +65,8 @@
         </section>
     </div>
 </template>
-<script>
-import contentHeader from '../components/content-header'
+<script  lang="ts">
+import contentHeader from '../components/content-header.vue'
 
 export default {
     name: "article",

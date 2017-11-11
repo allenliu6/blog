@@ -19,8 +19,8 @@
     </aside>
 </template>
 
-<script>
-    import bPopup from './Popup'
+<script  lang="ts">
+    import bPopup from './Popup.vue'
     export default {
         data(){
             return {
