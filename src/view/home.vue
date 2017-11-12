@@ -19,25 +19,40 @@
 </template>
 
 <script  lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
 import contentHeader from '../components/content-header.vue'
 
-export default {
-    data() {
-        return {
-            topics: []
-        }
-    },
+interface Topic {
+    date: string
+    title: string
+    summary: string
+    id: number
+    tab: string
+    pv: number
+    commentCount: number
+    tags?: string[]
+}
+
+interface Response {
+    data: {
+        topics: Topic[]
+    }
+}
+
+@Component({
     components: {
-        contentHeader
+        contentHeader,
     },
+})
+export default class Home extends Vue {
+    topics: Topic[] = []
     created() {
-        let self = this
         this.$http.get('./topics')
-            .then((response) => {
+            .then((response: Response) => {
                 console.log(response.data);
                 this.topics = response.data.topics
             })
-            .catch((error) => {
+            .catch((error: object) => {
                 console.log(error);
             });
     }

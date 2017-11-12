@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
 import axios from 'axios'
-import {transTab, timeToNow} from './filter'
+import {transTab, timeToNow} from './filter.js'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios

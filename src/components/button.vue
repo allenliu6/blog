@@ -6,38 +6,34 @@
     </button>
 </template>
 <script  lang="ts">
-export default {
-    name: "button",
-    data() {
-        return {
-            isMobile: false,
-            isShow: true,
-        };
-    },
-    methods: {
-        changeListShow() {
-            this.$emit('postListShow', !this.isShow)
-            this.isShow = !this.isShow
-        },
-        listenWidth() {
-            if (window.innerWidth <= 768) {
-                this.isMobile = true
-                this.isShow = false
-                this.$emit('postListShow', false)
-            } else {
-                this.isMobile = false
-                this.isShow = true
-                this.$emit('postListShow', true)
-            }
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component
+export default class Button extends Vue {
+    isMobile: boolean = false
+    isShow: boolean = true
+    changeListShow() {
+        this.$emit('postListShow', !this.isShow)
+        this.isShow = !this.isShow
+    }
+    listenWidth() {
+        if (window.innerWidth <= 768) {
+            this.isMobile = true
+            this.isShow = false
+            this.$emit('postListShow', false)
+        } else {
+            this.isMobile = false
+            this.isShow = true
+            this.$emit('postListShow', true)
         }
-    },
+    }
     created() {
         this.listenWidth()
 
         let bool = true
 
         window.addEventListener('resize', () => {
-            if(bool){
+            if (bool) {
                 this.listenWidth()
                 bool = false
 

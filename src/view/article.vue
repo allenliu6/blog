@@ -66,22 +66,51 @@
     </div>
 </template>
 <script  lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
 import contentHeader from '../components/content-header.vue'
 
-export default {
-    name: "article",
-    data() {
-        return {
-            article: {},
-            isSumbitBoxShow: false,
-        };
-    },
+interface Articles {
+    content: string
+    date: string
+    title: string
+    summary: string
+    id: number
+    tab: string
+    pv: number
+    tags?: string[]
+    lastModify: string
+    comments: {
+        name: string
+        avatar: string
+        content: string
+        date: string
+        replyInput?: string
+        isShow?: boolean
+        reply: {
+            name: string
+            avatar: string
+            content: string
+            date: string
+        }[]
+    }[]
+}
+
+interface Response {
+    data: Articles
+}
+
+@Component({
     components: {
         contentHeader
-    },
+    }
+})
+export default class Article extends Vue {
+    article: Articles
+    isSumbitBoxShow: boolean =  false
+    
     created() {
         this.$http.get('./article')
-            .then((response) => {
+            .then((response: Response) => {
                 response.data.comments.forEach((item) => {
                     item.isShow = false
                     item.replyInput = '输入评论'
@@ -89,20 +118,19 @@ export default {
                 console.log(response.data)
                 this.article = response.data
             })
-            .catch((error) => {
+            .catch((error: object) => {
                 console.log(error)
             })
-    },
-    methods: {
-        setShow(index){
-            let comment = this.article.comments[index]
-            comment.isShow = !comment.isShow
-        },
-        setInputReply(index, index2){
-            let comment = this.article.comments[index]
-            comment.replyInput = `回复 ${comment.reply[index2].name} ：`
-            console.log(comment)
-        }
+    }
+
+    setShow(index: number){
+        let comment = this.article.comments[index]
+        comment.isShow = !comment.isShow
+    }
+    setInputReply(index: number, index2: number){
+        let comment = this.article.comments[index]
+        comment.replyInput = `回复 ${comment.reply[index2].name} ：`
+        console.log(comment)
     }
 }
 </script>

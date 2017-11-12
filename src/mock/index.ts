@@ -1,5 +1,4 @@
-const Mock = require('mockjs')
-const Random = Mock.Random
+import Mock from 'mockjs'
 
 Mock.mock('./topics', 'get', {
     'topics|10': [{

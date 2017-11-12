@@ -20,6 +20,9 @@
     "vuex": "^3.0.0"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/marked": "^0.3.0",
+    "@types/mockjs": "^1.0.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-loader": "^7.1.1",
@@ -75,7 +78,9 @@
     "ts-loader": "^3.1.1",
     "typescript": "^2.6.1",
     "url-loader": "^0.5.8",
+    "vue-class-component": "^6.1.0",
     "vue-loader": "^13.3.0",
+    "vue-property-decorator": "^6.0.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",

@@ -17,22 +17,21 @@
 </template>
 
 <script  lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
 import bButton from './button.vue'
-export default {
-    data() {
-        return {
-            listShow: true
-        }
-    },
+
+@Component({
     components: {
         bButton
-    },
-    methods: {
-        postListShow(bool) {
-            this.listShow = bool
-        }
     }
-}
+})
+export default class Header extends Vue {
+    listShow: boolean = true
+
+    postListShow(bool: boolean) {
+        this.listShow = bool
+    }
+    }
 </script>
 
 <style lang="postcss" scoped>

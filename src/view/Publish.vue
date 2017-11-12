@@ -20,45 +20,45 @@
 </template>
 
 <script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import { AxiosInstance } from "axios"
 import marked from 'marked'
-export default {
-    data() {
-        return {
-            md: '',
-            mark: '',
-            title: "欢迎使用markdown编辑器，点击编辑",
-            throttleFlag: true
+
+@Component
+export default class Publish extends Vue{
+    md: string
+    mark: string
+    title: string = "欢迎使用markdown编辑器，点击编辑"
+    throttleFlag: Boolean = true
+
+    markdown() {
+        return marked(this.md)
+    }
+    changeDefault(e: Event) {
+        document.execCommand('insertHTML', false, '&nbsp;&nbsp;')
+    }
+    syncScroll(e: Event) {
+        if(this.throttleFlag){
+            const target = <HTMLElement>e.target,
+                sibling = <HTMLElement>target.nextElementSibling,
+                ratio = target.scrollTop / target.scrollHeight;
+            
+            sibling.scrollTop = sibling.scrollHeight * ratio
+            this.throttleFlag = false
+            let timer: any = setTimeout(() => {
+                this.throttleFlag = true
+                timer = null
+            }, 200);
         }
-    },
-    methods: {
-        markdown() {
-            return marked(this.md)
-        },
-        changeDefault(e) {
-            document.execCommand('insertHTML', false, '&nbsp;&nbsp;')
-        },
-        syncScroll(e) {
-            if(this.throttleFlag){
-                const target = e.target,
-                    sibling = e.target.nextElementSibling,
-                    ratio = e.target.scrollTop / e.target.scrollHeight;
-                
-                sibling.scrollTop = sibling.scrollHeight * ratio
-                this.throttleFlag = false
-                let timer = setTimeout(() => {
-                    this.throttleFlag = true
-                    timer = null
-                }, 200);
-            }
-        },
-        publishBlog(){
-            const {title, markdown, md} = this
-            this.$http.post('./publish', {
-                htmlContent: markdown(),
-                mdContent: md,
-                title
-            })
-        }
+    }
+    publishBlog(){
+        const {title, markdown, md} = this
+
+        this.$http.post('./publish', {
+            htmlContent: markdown(),
+            mdContent: md,
+            title
+        })
     }
 }
 </script>
