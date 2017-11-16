@@ -2,7 +2,20 @@
 
 > allen's blog supported by vue2.5
 
-vue2.5(typescript) vue-router vuex（暂时不用） vue-cli postcss axios marked mockjs font-awesome koa
+vue2.5 typescript vue-router vuex（暂时不用） vue-cli postcss axios marked mockjs font-awesome koa
+
+## 当前目录结构
+- assets  存放公共静态资源 暂有三类文件 img font css
+- components  公共组件
+- mock mockjs相关文件
+- router 路由文件  后续将每个路由对应一个js文件
+- server 暂时将服务端文件存放在此
+- store  vuex目录结构 暂时没有使用，将按照官网推荐目录结构使用
+- view  每个页面一个文件夹 里面存放私有资源（img css component）以及总 .vue 文件
+- App.vue  vue跟组件
+- filter.js  过滤文件 后续将单独作为一个文件夹
+- main.ts  主入口文件
+- .d.ts文件  ts相关配置声明文件
 
 ## 阶段一  
 目标：实现静态博客页面
