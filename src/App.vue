@@ -11,9 +11,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import bSidebar from './components/Sidebar.vue'
-import bHeader from './components/Header.vue'
-import bFooter from './components/footer.vue'
+import bSidebar from '@/components/sidebar/Sidebar.vue'
+import bHeader from '@/components/header/header.vue'
+import bFooter from '@/components/footer.vue'
 
 @Component({
 	components: {

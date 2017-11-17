@@ -18,7 +18,7 @@
 
 <script  lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import bButton from './button.vue'
+import bButton from './component/button'
 
 @Component({
     components: {

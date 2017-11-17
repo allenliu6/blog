@@ -14,7 +14,7 @@
         <section class="comments">
             <div class="comments_title">Comments</div>
             <div class="comments_box">
-                <img class="comments_box-avatar" src="../assets/default-avatar.e30559a.svg" alt="默认头像">
+                <img class="comments_box-avatar" src="@/assets/default-avatar.e30559a.svg" alt="默认头像">
                 <textarea @focus="isSumbitBoxShow = true" @blur="isSumbitBoxShow = false" class="comments_box-textarea" placeholder="说说你的看法"></textarea>
                 <transition name="slide-fade">
                     <div v-if="isSumbitBoxShow" class="submit-box">
@@ -67,37 +67,9 @@
 </template>
 <script  lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import contentHeader from '../components/content-header.vue'
-
-interface Articles {
-    content: string
-    date: string
-    title: string
-    summary: string
-    id: number
-    tab: string
-    pv: number
-    tags?: string[]
-    lastModify: string
-    comments: {
-        name: string
-        avatar: string
-        content: string
-        date: string
-        replyInput?: string
-        isShow?: boolean
-        reply: {
-            name: string
-            avatar: string
-            content: string
-            date: string
-        }[]
-    }[]
-}
-
-interface Response {
-    data: Articles
-}
+import contentHeader from '@/components/content-header.vue'
+import { Articles, Response, comment } from './interface'
+import $http from '$'
 
 @Component({
     components: {
@@ -109,7 +81,7 @@ export default class Article extends Vue {
     isSumbitBoxShow: boolean =  false
     
     created() {
-        this.$http.get('./article')
+        $http('./article', 'get')
             .then((response: Response) => {
                 response.data.comments.forEach((item) => {
                     item.isShow = false

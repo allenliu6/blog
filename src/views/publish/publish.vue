@@ -21,8 +21,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { AxiosInstance } from "axios"
 import marked from 'marked'
+import $http from '$'
 
 @Component
 export default class Publish extends Vue{
@@ -54,7 +54,7 @@ export default class Publish extends Vue{
     publishBlog(){
         const {title, markdown, md} = this
 
-        this.$http.post('./publish', {
+        $http('./publish', 'post', {
             htmlContent: markdown(),
             mdContent: md,
             title
@@ -64,7 +64,7 @@ export default class Publish extends Vue{
 </script>
 
 <style lang="postcss" scoped>
-@import "../assets/github-markdown.css";
+@import "github-markdown.css";
 
 .publish {
     position: absolute;

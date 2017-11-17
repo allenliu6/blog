@@ -2,7 +2,7 @@
     <aside>
         <transition name="slide-fade">
             <section class="side" v-show="isShow">
-                <img src="../assets/avatar.png" alt="博主头像" class="side_avatar">
+                <img src="./img/avatar.png" alt="博主头像" class="side_avatar">
                 <div>
                     <h3 class="side_name">Allen</h3>
                     <p class="side_sign">
@@ -34,7 +34,7 @@
 </template>
 
 <script  lang="ts">
-import bPopup from './Popup.vue'
+import bPopup from './component/popup.vue'
 import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component({
@@ -65,7 +65,7 @@ a {
     left: 0;
     bottom: 0;
     color: #efefef;
-    background: url('../assets/bg2.jpg') center no-repeat;
+    background: url('img/bg2.jpg') center no-repeat;
     -webkit-filter: saturate(0.7);
 
     & img {

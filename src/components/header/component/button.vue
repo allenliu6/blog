@@ -28,9 +28,8 @@ export default class Button extends Vue {
         }
     }
     created() {
-        this.listenWidth()
-
         let bool = true
+        this.listenWidth()
 
         window.addEventListener('resize', () => {
             if (bool) {

@@ -11,6 +11,7 @@ vue2.5 typescript vue-router vuex（暂时不用） vue-cli postcss axios marked
 - router 路由文件  后续将每个路由对应一个js文件
 - server 暂时将服务端文件存放在此
 - store  vuex目录结构 暂时没有使用，将按照官网推荐目录结构使用
+- util  项目静态js空间
 - view  每个页面一个文件夹 里面存放私有资源（img css component）以及总 .vue 文件
 - App.vue  vue跟组件
 - filter.js  过滤文件 后续将单独作为一个文件夹
