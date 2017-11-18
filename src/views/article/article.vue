@@ -69,7 +69,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import contentHeader from '@/components/content-header.vue'
 import { Articles, Response, comment } from './interface'
-import $http from '$'
+import $http from '@/services'
 
 @Component({
     components: {
@@ -81,7 +81,7 @@ export default class Article extends Vue {
     isSumbitBoxShow: boolean =  false
     
     created() {
-        $http('./article', 'get')
+        $http('article', 'get')
             .then((response: Response) => {
                 response.data.comments.forEach((item) => {
                     item.isShow = false

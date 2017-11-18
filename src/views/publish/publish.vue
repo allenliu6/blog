@@ -22,7 +22,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import marked from 'marked'
-import $http from '$'
+import $http from '@/services'
 
 @Component
 export default class Publish extends Vue{
@@ -54,7 +54,7 @@ export default class Publish extends Vue{
     publishBlog(){
         const {title, markdown, md} = this
 
-        $http('./publish', 'post', {
+        $http('publish', 'post', {
             htmlContent: markdown(),
             mdContent: md,
             title

@@ -5,7 +5,7 @@ declare var Promise: any;
 
 const MINI_TIME = 300
 let TIME_OUT_MAX = 3000
-let _apiHost = process.env.NODE_ENV === 'dev' ? 'http://localhost:3000/' : './'
+let _apiHost = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : './'
 
 axios.defaults.headers.common['Content-Type'] = 'application/json;charset=UTF-8'
 axios.defaults.baseURL = _apiHost

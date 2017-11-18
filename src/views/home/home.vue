@@ -22,7 +22,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import contentHeader from '@/components/content-header.vue'
 import { Topic, Response } from './interface'
-import $http from '$'
+import $http from '@/services'
 
 @Component({
     components: {
@@ -32,7 +32,7 @@ import $http from '$'
 export default class Home extends Vue {
     topics: Topic[] = []
     created() {
-        $http('./topics', 'get')
+        $http('topics', 'get')
             .then((response: Response) => {
                 console.log(response.data);
                 this.topics = response.data.topics
