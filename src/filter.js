@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const transTab = (tab) => {
     switch (tab) {
         case 'network':
@@ -38,4 +40,8 @@ export const timeToNow = (time) => {
 		}
 	}
 	return str;
+}
+
+export const formatDate = (time) => {
+	return moment(time).format('YYYY-MM-DD HH:mm')
 }

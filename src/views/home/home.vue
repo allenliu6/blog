@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="topics" v-for="topic in topics">
-            <content-header :title="topic.title" :date="topic.date" :tab="topic.tab" :pv="topic.pv" :commentsCount="topic.commentCount"></content-header>
+            <content-header :id="topic._id" :title="topic.title" :date="topic.date" :tab="topic.tab" :pv="topic.pv" :commentsCount="topic.commentsCount"></content-header>
             <p class="topics_summary">
                 {{topic.summary}}
             </p>
@@ -10,7 +10,8 @@
             </p>
         </section>
         <nav class="pagination">
-            <a href="" class="pagination_next clearFloat">下一页 »</a>
+            <a v-if="page > 1" class="pagination_prev clearFloat" @click="setPage(-1)">« 上一页</a>
+            <a v-if="page < allPage" class="pagination_next clearFloat" @click="setPage(1)">下一页 »</a>
             <div class="pagination_timeline">
                 <a href="">博客归档</a>
             </div>
@@ -21,7 +22,7 @@
 <script  lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import contentHeader from '@/components/content-header.vue'
-import { Topic, Response } from './interface'
+import { Topic } from './interface'
 import $http from '@/services'
 
 @Component({
@@ -31,15 +32,34 @@ import $http from '@/services'
 })
 export default class Home extends Vue {
     topics: Topic[] = []
+    page: number
+    tab: string
+    allPage: number
+
     created() {
-        $http('topics', 'get')
-            .then((response: Response) => {
-                console.log(response.data);
-                this.topics = response.data.topics
+        const {page = 1, tab = 'all'} = this.$route.params
+        this.allPage = this.page = page ? +page : this.page
+        this.tab = tab ? tab : this.tab
+
+        this.getTopics(this.page, this.tab)
+    }
+
+    getTopics(page: number, tab: string){
+        $http('topics', 'get', {page, tab})
+            .then((data: any) => {
+                this.topics = <Topic[]>data.topics
+                this.allPage = data.allPage
             })
-            .catch((error: object) => {
+            .catch((error: Error) => {
                 console.log(error);
             });
+    }
+
+    setPage(change: number){
+        this.page += change
+        const {page, tab} = this
+        this.$router.push({path: `/tab/${tab}/page/${+page}`})
+        this.getTopics(this.page, this.tab)
     }
 }
 
@@ -108,7 +128,13 @@ a {
     }
 
     & .pagination_next {
+        cursor: pointer;
         float: right;
+    }
+
+    & .pagination_prev {
+        cursor: pointer;
+        float: left;
     }
 }
 </style>

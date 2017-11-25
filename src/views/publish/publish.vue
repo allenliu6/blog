@@ -26,8 +26,7 @@ import $http from '@/services'
 
 @Component
 export default class Publish extends Vue{
-    md: string
-    mark: string
+    md: string = ''
     title: string = "欢迎使用markdown编辑器，点击编辑"
     throttleFlag: Boolean = true
 
@@ -52,13 +51,13 @@ export default class Publish extends Vue{
         }
     }
     publishBlog(){
-        const {title, markdown, md} = this
+        const {title, markdown} = this
 
-        $http('publish', 'post', {
-            htmlContent: markdown(),
-            mdContent: md,
+        $http('article/publish', 'post', {
+            content: markdown(),
             title
         })
+        .catch( (error: Object) => console.log(error))
     }
 }
 </script>
@@ -88,7 +87,7 @@ export default class Publish extends Vue{
         margin-top: 5%;
 
         & .header_title {
-            width: 60%;
+            width: 70%;
             height: 40px;
             font-size: 22px;
             border: 0;

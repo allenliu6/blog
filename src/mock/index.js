@@ -11,7 +11,7 @@ Mock.mock('./topics', 'get', {
             'life'
         ],
         'pv': '@natural(1000, 10000)',
-        'commentCount': '@natural(10, 20)',
+        'commentsCount': '@natural(10, 20)',
         'id': '@id',
         'title': '@ctitle()',
         'summary': '@cparagraph',

@@ -8,10 +8,10 @@ export interface Articles {
     pv: number
     tags?: string[]
     lastModify: string
-    comments: comment[]
+    comments: Comment[]
 }
 
-export interface comment {
+export interface Comment {
     name: string
     avatar: string
     content: string
@@ -26,6 +26,7 @@ export interface comment {
     }[]
 }
 
-export interface Response {
-    data: Articles
+export interface Item {
+    isShow: boolean,
+    replyInput: string
 }

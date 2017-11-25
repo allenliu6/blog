@@ -14,8 +14,8 @@ export default new Router({
       component: Home
     },
     {
-      path: '/home',
-      name: 'home',
+      path: '/tab/:tab/page/:page',
+      name: 'page',
       component: Home
     },
     {
@@ -24,7 +24,7 @@ export default new Router({
       component: Publish
     },
     {
-      path: '/article',
+      path: '/article/:id',
       name: 'article',
       component: Article
     }

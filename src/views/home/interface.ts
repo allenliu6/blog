@@ -5,12 +5,6 @@ export interface Topic {
     id: number
     tab: string
     pv: number
-    commentCount: number
+    commentsCount: number
     tags?: string[]
-}
-
-export interface Response {
-    data: {
-        topics: Topic[]
-    }
 }

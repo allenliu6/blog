@@ -1,20 +1,20 @@
 <template>
     <div>
-        <content-header :title="article.title" :date="article.date" :tab="article.tab" :pv="article.pv" :commentsCount="Object.keys(article.comments).length"></content-header>
-        <article class="detail" v-text="article.content"></article>
+        <content-header :title="article.title" :date="article.date" :tab="article.tab" :pv="article.pv" :commentsCount="article.commentsCount"></content-header>
+        <article class="detail" v-html="article.content"></article>
         <p>
             发表于
             <i>2017-06-26 16:28:43</i>，最后修改于
             <i>2017-06-28 12:17:46</i>
         </p>
         <nav class="pagination">
-            <a href="" class="pagination_next clearFloat">下一页 »</a>
-            <a href="" class="pagination_prev clearFloat">上一页 »</a>
+            <router-link v-if="prevTitle._id" :to="{name: 'article', params: {id: prevTitle._id}}" class="pagination_prev clearFloat">上一篇 » {{prevTitle.title}}</router-link>
+            <router-link v-if="nextTitle._id" :to="{name: 'article', params: {id: nextTitle._id}}" class="pagination_next clearFloat">下一篇 » {{nextTitle.title}}</router-link>
         </nav>
         <section class="comments">
             <div class="comments_title">Comments</div>
             <div class="comments_box">
-                <img class="comments_box-avatar" src="@/assets/default-avatar.e30559a.svg" alt="默认头像">
+                <img class="comments_box-avatar" src="./default-avatar.e30559a.svg" alt="默认头像">
                 <textarea @focus="isSumbitBoxShow = true" @blur="isSumbitBoxShow = false" class="comments_box-textarea" placeholder="说说你的看法"></textarea>
                 <transition name="slide-fade">
                     <div v-if="isSumbitBoxShow" class="submit-box">
@@ -32,13 +32,13 @@
                         <div class="detail_foot">
                             <i class="fa fa-comment-o"></i>
                             <a @click="setShow(index)" class="detail_foot-reply">
-                                <span v-if="!comment.isShow">{{comment.reply.length}}条评论</span>
+                                <span v-if="!items[index].isShow">{{comment.reply.length}}条评论</span>
                                 <span v-else>收起评论</span>
                             </a>
                             <span class="detail_foot-date">{{comment.date | timeToNow}}</span>
                         </div>
                         <transition name="slide-fade">
-                            <div v-if="comment.isShow" class="detail_reply">
+                            <div v-if="items[index].isShow" class="detail_reply">
                                 <div class="reply_arrow"></div>
                                 <ul>
                                     <li v-for="(reply, index2) in comment.reply">
@@ -54,7 +54,7 @@
                                     </li>
                                 </ul>
                                 <form class="reply_submit">
-                                    <input class="submit_input" type="text" :placeholder="comment.replyInput">
+                                    <input class="submit_input" type="text" :placeholder="items[index].replyInput">
                                     <button class="submit-btn">评论</button>
                                 </form>
                             </div>
@@ -68,7 +68,7 @@
 <script  lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import contentHeader from '@/components/content-header.vue'
-import { Articles, Response, comment } from './interface'
+import { Articles, Comment, Item } from './interface'
 import $http from '@/services'
 
 @Component({
@@ -77,32 +77,40 @@ import $http from '@/services'
     }
 })
 export default class Article extends Vue {
-    article: Articles
+    article: any = {}
     isSumbitBoxShow: boolean =  false
+    items: Item[] = []
+    prevTitle: object
+    nextTitle: object
     
     created() {
-        $http('article', 'get')
-            .then((response: Response) => {
-                response.data.comments.forEach((item) => {
-                    item.isShow = false
-                    item.replyInput = '输入评论'
-                })
-                console.log(response.data)
-                this.article = response.data
+        $http(`article/${this.$route.params.id}`, 'get')
+            .then((data: any) => {
+                this.article = <Articles>data.article
+                this.prevTitle = data.nearArticle.prevTitle
+                this.nextTitle = data.nearArticle.nextTitle
+
+                const commentsCount: number = this.article.commentsCount
+                const { items } = this
+                for (let index = 0; index < commentsCount; index++) {
+                    items[index].isShow = false
+                    items[index].replyInput = '输入评论'
+                }
             })
-            .catch((error: object) => {
+            .catch((error: Error) => {
                 console.log(error)
             })
     }
 
     setShow(index: number){
-        let comment = this.article.comments[index]
-        comment.isShow = !comment.isShow
+        const item = this.items[index]
+        item.isShow = !item.isShow
     }
     setInputReply(index: number, index2: number){
-        let comment = this.article.comments[index]
-        comment.replyInput = `回复 ${comment.reply[index2].name} ：`
-        console.log(comment)
+        const item = this.items[index],
+            replyContent = this.article.comments[index].reply[index2]
+        
+        item.replyInput = `回复 ${replyContent.name} ：`
     }
 }
 </script>

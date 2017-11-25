@@ -3,7 +3,7 @@
         <b-button @postListShow="postListShow" class="header_nav-button"></b-button>
         <transition name="slide-fade">
             <nav v-show="listShow" class="header_nav-list">
-                <a href="javascript: void(0)">主页</a>
+                <router-link :to="{name: 'home'}">主页</router-link>
                 <a href="javascript: void(0)">归档</a>
                 <a href="javascript: void(0)">分类</a>
                 <a href="javascript: void(0)">关于</a>

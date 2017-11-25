@@ -1,7 +1,8 @@
 <template>
     <div class="header">
         <h1 class="header_title">
-            <a :href="link">{{title}}</a>
+            <router-link v-if="typeof id !== 'undefined'" :to="{name: 'article', params: {id}}">{{title}}</router-link>
+            <span v-else>{{title}}</span>
         </h1>
         <div class="header_info">
             <span v-if="date">
@@ -10,13 +11,13 @@
             </span>
             <span v-if="tab">
                 <i class="fa fa-folder-o"></i>
-                {{tab | transTab}}
+                <span v-for="tag in tab">{{tag | transTab}}</span>
             </span>
-            <span v-if="pv">
+            <span v-if="typeof pv === 'number'">
                 <i class="fa fa-eye"></i>
                 {{pv}}
             </span>
-            <span v-if="commentsCount">
+            <span v-if="typeof commentsCount === 'number'">
                 <i class="fa fa-commenting"></i>
                 {{commentsCount}}
             </span>
@@ -26,21 +27,15 @@
 <script  lang="ts">
 export default {
     name: "content-header",
-    data() {
-        return {
-
-        };
-    },
     props: {
         title: {
-            type: String,
-            required: true
+            type: String
         },
         date: {
-            type: String,
+            type: String
         },
         tab: {
-            type: String,
+            type: Array
         },
         pv: {
             type: Number
@@ -48,8 +43,8 @@ export default {
         commentsCount: {
             type: Number
         },
-        link: {
-            type: String,
+        id: {
+            type: String
         }
     }
 }
