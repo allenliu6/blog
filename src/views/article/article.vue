@@ -7,7 +7,7 @@
             <i>2017-06-26 16:28:43</i>，最后修改于
             <i>2017-06-28 12:17:46</i>
         </p>
-        <pagaination :isRouterShow="[!!prevTitle, !!nextTitle]" :linkContent="[`« 上一篇：${prevTitle.title}`, `» 下一篇：${nextTitle.title}`]" :params="[{name: 'article', params: {id: prevTitle._id}}, {name: 'article', params: {id: nextTitle._id}}]"></pagaination>
+        <pagination :isRouterShow="[!!prevTitle, !!nextTitle]" :linkContent="[`« 上一篇：${prevTitle.title}`, `» 下一篇：${nextTitle.title}`]" :params="[{name: 'article', params: {id: prevTitle._id}}, {name: 'article', params: {id: nextTitle._id}}]"></pagination>
         <section class="comments">
             <div class="comments_title">Comments</div>
             <div class="comments_box">
@@ -65,14 +65,14 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import contentHeader from '@/components/content-header.vue'
-import pagaination from '../../components/pagination.vue'
+import pagination from '../../components/pagination.vue'
 import { Articles, Comment, Item } from './interface'
 import $http from '@/services'
 
 @Component({
     components: {
         contentHeader,
-        pagaination
+        pagination
     }
 })
 export default class Article extends Vue {

@@ -9,21 +9,21 @@
                 <a class="topics_more-link" href="">阅读全文 »</a>
             </p>
         </section>
-        <pagaination :centerContentLink="'/'" :isCenterContentShow="true" :isRouterShow="[page > 1, page < allPage]" :linkContent="['« 上一页', '下一页 »']" :params="[{name: 'page', params: {tab, page: page - 1}}, {name: 'page', params: {tab, page: page + 1}}]"></pagaination>
+        <pagination :centerContentLink="'/'" :isCenterContentShow="true" :isRouterShow="[page > 1, page < allPage]" :linkContent="['« 上一页', '下一页 »']" :params="[{name: 'page', params: {tab, page: page - 1}}, {name: 'page', params: {tab, page: page + 1}}]"></pagination>
     </div>
 </template>
 
 <script  lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import contentHeader from '@/components/content-header.vue'
-import pagaination from '../../components/pagination.vue'
+import pagination from '../../components/pagination.vue'
 import { Topic } from './interface'
 import $http from '@/services'
 
 @Component({
     components: {
         contentHeader,
-        pagaination
+        pagination
     },
 })
 export default class Home extends Vue {

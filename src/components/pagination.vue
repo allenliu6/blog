@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-	name: "pagaination",
+	name: "pagination",
 	props:{
 		params: {
 			type: Array
