@@ -7,10 +7,7 @@
             <i>2017-06-26 16:28:43</i>，最后修改于
             <i>2017-06-28 12:17:46</i>
         </p>
-        <nav class="pagination">
-            <router-link v-if="prevTitle._id" :to="{name: 'article', params: {id: prevTitle._id}}" class="pagination_prev clearFloat">上一篇 » {{prevTitle.title}}</router-link>
-            <router-link v-if="nextTitle._id" :to="{name: 'article', params: {id: nextTitle._id}}" class="pagination_next clearFloat">下一篇 » {{nextTitle.title}}</router-link>
-        </nav>
+        <pagaination :isRouterShow="[!!prevTitle, !!nextTitle]" :linkContent="[`« 上一篇：${prevTitle.title}`, `» 下一篇：${nextTitle.title}`]" :params="[{name: 'article', params: {id: prevTitle._id}}, {name: 'article', params: {id: nextTitle._id}}]"></pagaination>
         <section class="comments">
             <div class="comments_title">Comments</div>
             <div class="comments_box">
@@ -65,26 +62,37 @@
         </section>
     </div>
 </template>
-<script  lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+<script lang="ts">
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import contentHeader from '@/components/content-header.vue'
+import pagaination from '../../components/pagination.vue'
 import { Articles, Comment, Item } from './interface'
 import $http from '@/services'
 
 @Component({
     components: {
-        contentHeader
+        contentHeader,
+        pagaination
     }
 })
 export default class Article extends Vue {
     article: any = {}
     isSumbitBoxShow: boolean =  false
     items: Item[] = []
-    prevTitle: object
-    nextTitle: object
+    prevTitle: object = {}
+    nextTitle: object = {}
     
-    created() {
-        $http(`article/${this.$route.params.id}`, 'get')
+    mounted() {
+        this.getArticle(this.$route.params.id)
+    }
+
+    @Watch('$route')
+    onRouteChange(val: any, oldVal: any){
+        this.getArticle(val.params.id)
+    }
+
+    getArticle(id: string){
+        $http(`article`, 'get', {id})
             .then((data: any) => {
                 this.article = <Articles>data.article
                 this.prevTitle = data.nearArticle.prevTitle
@@ -163,31 +171,9 @@ button:hover{
     }
 }
 
-.pagination {
-    border-bottom: 1px solid #ddd;
-    border-top: 1px solid #ddd;
-    line-height: 20px;
-    padding: 20px 0;
-    overflow: hidden;
-    margin: 40px 0;
-
-    & .pagination_timeline {
-        margin: auto;
-        width: 100px;
-        text-align: center;
-    }
-
-    & .pagination_next {
-        float: right;
-    }
-
-    & .pagination_prev {
-        float: left;
-    }
-}
-
 .comments {
     text-align: center;
+    padding: 0 100px;
 
     & .comments_title {
         padding: 20px 0;

@@ -7,7 +7,7 @@
         <div class="header_info">
             <span v-if="date">
                 <i class="fa fa-calendar-o"></i>
-                {{date}}
+                {{date | formatDate}}
             </span>
             <span v-if="tab">
                 <i class="fa fa-folder-o"></i>

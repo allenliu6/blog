@@ -9,25 +9,21 @@
                 <a class="topics_more-link" href="">阅读全文 »</a>
             </p>
         </section>
-        <nav class="pagination">
-            <a v-if="page > 1" class="pagination_prev clearFloat" @click="setPage(-1)">« 上一页</a>
-            <a v-if="page < allPage" class="pagination_next clearFloat" @click="setPage(1)">下一页 »</a>
-            <div class="pagination_timeline">
-                <a href="">博客归档</a>
-            </div>
-        </nav>
+        <pagaination :centerContentLink="'/'" :isCenterContentShow="true" :isRouterShow="[page > 1, page < allPage]" :linkContent="['« 上一页', '下一页 »']" :params="[{name: 'page', params: {tab, page: page - 1}}, {name: 'page', params: {tab, page: page + 1}}]"></pagaination>
     </div>
 </template>
 
 <script  lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import contentHeader from '@/components/content-header.vue'
+import pagaination from '../../components/pagination.vue'
 import { Topic } from './interface'
 import $http from '@/services'
 
 @Component({
     components: {
         contentHeader,
+        pagaination
     },
 })
 export default class Home extends Vue {
@@ -36,12 +32,22 @@ export default class Home extends Vue {
     tab: string
     allPage: number
 
-    created() {
+    created(){
         const {page = 1, tab = 'all'} = this.$route.params
         this.allPage = this.page = page ? +page : this.page
         this.tab = tab ? tab : this.tab
+    }
 
+    mounted() {
         this.getTopics(this.page, this.tab)
+    }
+
+    @Watch('$route')
+    onRouteChange(val: any, oldVal: any){
+        const {page, tab} = val.params
+        this.getTopics(page, tab)
+        this.page = page
+        this.tab = tab
     }
 
     getTopics(page: number, tab: string){
@@ -53,13 +59,6 @@ export default class Home extends Vue {
             .catch((error: Error) => {
                 console.log(error);
             });
-    }
-
-    setPage(change: number){
-        this.page += change
-        const {page, tab} = this
-        this.$router.push({path: `/tab/${tab}/page/${+page}`})
-        this.getTopics(this.page, this.tab)
     }
 }
 
@@ -116,25 +115,7 @@ a {
     }
 }
 
-.pagination {
-    border-bottom: 1px solid #ddd;
-    line-height: 20px;
-    padding: 20px 0;
-
-    & .pagination_timeline {
-        margin: auto;
-        width: 100px;
-        text-align: center;
-    }
-
-    & .pagination_next {
-        cursor: pointer;
-        float: right;
-    }
-
-    & .pagination_prev {
-        cursor: pointer;
-        float: left;
-    }
+.topics:nth-last-of-type(1){
+    border-bottom: none;
 }
 </style>

@@ -1,24 +1,24 @@
 import moment from 'moment'
 
 export const transTab = (tab) => {
-    switch (tab) {
-        case 'network':
-            return '计算机网络'
-        
-        case 'interview':
-            return '面经'
-        
-        case 'frame':
-            return '框架'
+	switch (tab) {
+		case 'network':
+			return '计算机网络'
 
-        case 'computer':
-            return '计算机基础'
+		case 'interview':
+			return '面经'
 
-        case 'life':
-            return '爱生活'
+		case 'frame':
+			return '框架'
 
-        default: return 'JavaScript'
-    }
+		case 'computer':
+			return '计算机基础'
+
+		case 'life':
+			return '爱生活'
+
+		default: return 'JavaScript'
+	}
 }
 
 export const timeToNow = (time) => {
@@ -43,5 +43,5 @@ export const timeToNow = (time) => {
 }
 
 export const formatDate = (time) => {
-	return moment(time).format('YYYY-MM-DD HH:mm')
+	return moment(parseInt(time)).format('YYYY-MM-DD HH:mm')
 }
