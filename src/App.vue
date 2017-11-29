@@ -53,8 +53,6 @@ export default class App extends Vue {
 }
 
 
-
-
 /* postcss common css */
 
 .clearFloat::after {
@@ -64,8 +62,6 @@ export default class App extends Vue {
 	height: 0;
 	overflow: hidden;
 }
-
-
 
 
 
@@ -124,7 +120,13 @@ button {
 	transition: background-color .3s;
 }
 
+input:hover,textarea:hover{
+    border-color: #007fff;
+}
 
+button:hover{
+    background-color: #0371df;
+}
 
 
 /* responsive layout */

@@ -2,7 +2,17 @@
 
 > allen's blog supported by vue2.5
 
-vue2.5 typescript vue-router vuex（暂时不用） vue-cli postcss axios marked mockjs font-awesome koa
+## 技术栈
+vue2.5 + typescript   配置略麻烦，在个人csdn博客中有相关介绍
+vue-router   项目尚未优化 目前钩子使用较少
+vuex（项目复杂度有限暂时不使用） 
+axios   官方推荐库，比较好用，本身使用有限，尚可以优化
+marked  markdown解析库
+mockjs  mock数据，添加TS后失效，服务端建设跟进所以暂未修复
+font-awesome  优秀的图标库，可以不再维护了
+vue-cli  进行了一定编译优化  目前编译速度较慢，可能是TS原因
+postcss
+另外[后端 repository](https://github.com/allenliu6/blog-server)
 
 ## 当前目录结构
 - assets  存放公共静态资源 暂有三类文件 img font css
@@ -21,10 +31,10 @@ vue2.5 typescript vue-router vuex（暂时不用） vue-cli postcss axios marked
 ## 阶段一  
 目标：实现静态博客页面
 
-1. 简单页面，首页、详情页、编辑页，包含三大部分header  sidebar  content
+1. 简单页面，首页、详情页、编辑页，包含三大部分header  sidebar  content
 2. 响应式布局和动画过渡效果
     - 暂时只一个断点  768
-    - REM  初始化时JS确定REM大小，单位统一REM   字体使用em
+    - REM 初始化时确定rem大小 除字体使用em 其他单位统一REM
     - 过渡效果暂时只做简单平移消失  动画最后补充
 
 
@@ -72,11 +82,11 @@ vue2.5 typescript vue-router vuex（暂时不用） vue-cli postcss axios marked
         -   content:
         -   date:
         -   reply: [{  
-        -       name:  
-        -       avatar:  
-        -       content:  
-        -       date:
-        -   }]
+                name:  
+                avatar:  
+                content:  
+                date:
+            }]
         - }]
         - content
         - pv

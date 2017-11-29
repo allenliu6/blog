@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="topics" v-for="topic in topics">
+        <section :key="index" class="topics" v-for="(topic, index) in topics">
             <content-header :id="topic._id" :title="topic.title" :date="topic.date" :tab="topic.tab" :pv="topic.pv" :commentsCount="topic.commentsCount"></content-header>
             <p class="topics_summary">
                 {{topic.summary}}

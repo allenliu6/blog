@@ -7,7 +7,7 @@
             <i>2017-06-26 16:28:43</i>，最后修改于
             <i>2017-06-28 12:17:46</i>
         </p>
-        <pagination :isRouterShow="[!!prevTitle, !!nextTitle]" :linkContent="[`« 上一篇：${prevTitle.title}`, `» 下一篇：${nextTitle.title}`]" :params="[{name: 'article', params: {id: prevTitle._id}}, {name: 'article', params: {id: nextTitle._id}}]"></pagination>
+        <pagination :isRouterShow="[prevTitle.title, nextTitle.title]" :linkContent="[`« 上一篇：${prevTitle.title}`, `» 下一篇：${nextTitle.title}`]" :params="[{name: 'article', params: {id: prevTitle._id}}, {name: 'article', params: {id: nextTitle._id}}]"></pagination>
         <section class="comments">
             <div class="comments_title">Comments</div>
             <div class="comments_box">
@@ -95,8 +95,8 @@ export default class Article extends Vue {
         $http(`article`, 'get', {id})
             .then((data: any) => {
                 this.article = <Articles>data.article
-                this.prevTitle = data.nearArticle.prevTitle
-                this.nextTitle = data.nearArticle.nextTitle
+                this.prevTitle = data.nearArticle.prevTitle || {}
+                this.nextTitle = data.nearArticle.nextTitle || {}
 
                 const commentsCount: number = this.article.commentsCount
                 const { items } = this
@@ -125,14 +125,6 @@ export default class Article extends Vue {
 <style lang="postcss" scoped>
 a {
     color: #2479CC;
-}
-
-input:hover,textarea:hover{
-    border-color: #007fff;
-}
-
-button:hover{
-    background-color: #0371df;
 }
 
 .header {

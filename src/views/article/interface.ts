@@ -8,6 +8,7 @@ export interface Articles {
     pv: number
     tags?: string[]
     lastModify: string
+    markdown: string
     comments: Comment[]
 }
 

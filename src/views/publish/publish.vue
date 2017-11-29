@@ -2,7 +2,7 @@
     <content class="publish">
         <section class="body">
             <textarea v-model="md" @keydown.tab.prevent="changeDefault" @scroll="syncScroll" class="body_edit"></textarea>
-            <article v-html="markdown(md)" class="body_show markdown-body"></article>
+            <article v-html="transMarkdown(md)" class="body_show markdown-body"></article>
         </section>
         <section class="header">
             <input v-model="title" type="text" class="header_title" placeholder="文章标题">
@@ -21,6 +21,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import { Articles } from '../article/interface'
 import marked from 'marked'
 import $http from '@/services'
 
@@ -30,7 +31,20 @@ export default class Publish extends Vue{
     title: string = "欢迎使用markdown编辑器，点击编辑"
     throttleFlag: Boolean = true
 
-    markdown() {
+    mounted(){
+        const { id } = this.$route.params
+        if(id){
+            $http('/article/publish', 'get', {id})
+                .then((data: any) => {
+                    const { markdown = '', title } = <Articles>data.article
+                    this.md = markdown
+                    this.title = title
+                })
+                .catch( (error: Object) => console.log(error))
+        }
+    }
+
+    transMarkdown() {
         return marked(this.md)
     }
     changeDefault(e: Event) {
@@ -51,10 +65,11 @@ export default class Publish extends Vue{
         }
     }
     publishBlog(){
-        const {title, markdown} = this
+        const {title, transMarkdown, md} = this
 
-        $http('article/publish', 'post', {
-            content: markdown(),
+        $http('article', 'post', {
+            content: transMarkdown(),
+            markdown: md,
             title
         })
         .catch( (error: Object) => console.log(error))

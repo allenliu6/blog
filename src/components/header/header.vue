@@ -3,13 +3,13 @@
         <b-button @postListShow="postListShow" class="header_nav-button"></b-button>
         <transition name="slide-fade">
             <nav v-show="listShow" class="header_nav-list">
-                <router-link :to="{name: 'home'}">主页</router-link>
-                <a href="javascript: void(0)">归档</a>
-                <a href="javascript: void(0)">分类</a>
-                <a href="javascript: void(0)">关于</a>
-                <a href="javascript: void(0)">作品</a>
-                <a href="javascript: void(0)">友链</a>
-                <a href="javascript: void(0)">搜索</a>
+                <router-link :to="{name: 'home'}"><i class="fa fa-home"></i> 主页 </router-link>
+                <a href="javascript: void(0)"><i class="fa fa-archive"></i> 归档 </a>
+                <a href="javascript: void(0)"><i class="fa fa-tags"></i> 分类 </a>
+                <a href="javascript: void(0)"><i class="fa fa-user"></i> 关于 </a>
+                <a href="javascript: void(0)"><i class="fa fa-file-code-o"></i> 作品 </a>
+                <a href="javascript: void(0)"><i class="fa fa-link"></i> 友链 </a>
+                <a href="javascript: void(0)"><i class="fa fa-search"></i> 搜索 </a>
             </nav>
         </transition>
         <h2 class="header_nav-title">Allen's Blog</h2>
@@ -48,7 +48,7 @@ export default class Header extends Vue {
 
     & .header_nav-list {
         display: flex;
-        margin: 0 1.2rem;
+        margin: 0 0.3rem 0 0.5rem;
 
         & a {
             height: 50px;
