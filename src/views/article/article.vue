@@ -165,7 +165,7 @@ a {
 
 .comments {
     text-align: center;
-    padding: 0 100px;
+    padding: 0 50px;
 
     & .comments_title {
         padding: 20px 0;
@@ -361,18 +361,4 @@ a {
         }
     }
 }
-
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-    transition: opacity .5s;
-}
-
-.slide-fade-enter,
-.slide-fade-leave-to
-/* .fade-leave-active in below version 2.1.8 */
-
-{
-    opacity: 0;
-}
-
 </style>

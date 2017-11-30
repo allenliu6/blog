@@ -47,8 +47,6 @@ export default class Publish extends Vue{
                 })
                 .catch( (error: Object) => console.log(error))
         }
-
-        
     }
 
     transMarkdown() {

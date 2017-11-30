@@ -122,6 +122,7 @@
     .header{
         display: flex;
         border-bottom: solid 1px #ccc;
+        margin-top: 30px;
 
         & .header_title{
             width: 50%;
@@ -182,18 +183,5 @@
             height: 100%;
             width: 100%;
         }
-    }
-
-    .slide-fade-enter-active,
-    .slide-fade-leave-active {
-        transition: opacity .5s;
-    }
-
-    .slide-fade-enter,
-    .slide-fade-leave-to
-    /* .fade-leave-active in below version 2.1.8 */
-
-    {
-        opacity: 0;
     }
 </style>

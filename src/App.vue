@@ -1,9 +1,11 @@
 <template>
 	<div id="app">
-		<b-header></b-header>
 		<b-sidebar></b-sidebar>
 		<div class="content">
-			<router-view/>
+			<b-header></b-header>
+			<transition name="slide-fade">
+				<router-view class="content_view" />
+			</transition>
 			<b-footer></b-footer>
 		</div>
 	</div>
@@ -27,7 +29,7 @@ export default class App extends Vue {
 }
 </script>
 
-<style>
+<style lang="postcss">
 @import url('./assets/font-awesome.css');
 .fa {
 	margin-right: 5px;
@@ -39,13 +41,22 @@ export default class App extends Vue {
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 	color: #2c3e50;
+	display: flex;
+	height: 100vh;
 }
 
 .content {
-	margin-left: 3rem;
-	height: 100%;
-	padding: 30px 50px;
+	min-height: 100vh;
 	text-align: left;
+	flex: auto;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+
+	& .content_view{
+		padding: 0px 1.5rem;
+		flex: auto;
+	}
 
 	@media (width <=768px) {
 		margin: 0;
@@ -63,7 +74,18 @@ export default class App extends Vue {
 	overflow: hidden;
 }
 
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+    transition: opacity .5s;
+}
 
+.slide-fade-enter,
+.slide-fade-leave-to
+/* .fade-leave-active in below version 2.1.8 */
+
+{
+    opacity: 0;
+}
 
 /* reset */
 

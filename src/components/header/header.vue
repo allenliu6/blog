@@ -36,7 +36,7 @@ export default class Header extends Vue {
 
 <style lang="postcss" scoped>
 .header_nav {
-    width: 100%;
+    min-height: 50px;
     display: flex;
     align-items: space-around;
     flex-direction: row-reverse;
@@ -51,7 +51,6 @@ export default class Header extends Vue {
         margin: 0 0.3rem 0 0.5rem;
 
         & a {
-            height: 50px;
             line-height: 50px;
             margin: 0 0.5em;
         }
@@ -60,12 +59,6 @@ export default class Header extends Vue {
     & .header_nav-title {
         line-height: 50px;
     }
-}
-
-& .header_toggle {
-    position: fixed;
-    right: 5px;
-    top: 5px;
 }
 
 @media (width <=768px) {
@@ -93,18 +86,5 @@ export default class Header extends Vue {
             top: 10px;
         }
     }
-}
-
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-    transition: opacity .5s;
-}
-
-.slide-fade-enter,
-.slide-fade-leave-to
-/* .fade-leave-active in below version 2.1.8 */
-
-{
-    opacity: 0;
 }
 </style>

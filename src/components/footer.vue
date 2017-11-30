@@ -30,7 +30,7 @@
 
     .footer{
         line-height: 1.8;
-        padding: 15px 0;
+        padding: 25px 0 15px 0;
         text-align: center;
     }
 </style>

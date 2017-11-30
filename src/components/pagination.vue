@@ -35,7 +35,7 @@ export default {
 		border-bottom: 1px solid #ddd;
 		border-top: 1px solid #ddd;
 		line-height: 20px;
-		padding: 20px 0;
+		padding: 15px 0;
 		overflow: hidden;
 		text-align: center;
 		display: flex;

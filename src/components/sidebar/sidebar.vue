@@ -1,6 +1,6 @@
 <template>
-    <aside>
-        <transition name="slide-fade">
+    <transition name="slide-fade">
+        <aside>
             <section class="side" v-show="isShow">
                 <img src="./img/avatar.png" alt="博主头像" class="side_avatar">
                 <div>
@@ -28,9 +28,9 @@
                     </li>
                 </ul>
             </section>
-        </transition>
-        <b-popup @postSideShow="postSideShow" class="toggle" :status="isShow"></b-popup>
-    </aside>
+            <b-popup @postSideShow="postSideShow" class="toggle" :status="isShow"></b-popup>
+        </aside>
+    </transition>
 </template>
 
 <script  lang="ts">
@@ -57,22 +57,25 @@ a {
     font-weight: bold;
 }
 
+aside {
+    flex: none;
+    background: url('img/bg2.jpg') center no-repeat;
+    -webkit-filter: saturate(0.7);
+    overflow-y: hidden;
+    display: block;
+    height: 100vh;
+}
+
 .side {
     width: 2.8rem;
     padding: 50px 0.1rem 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
     color: #efefef;
-    background: url('img/bg2.jpg') center no-repeat;
-    -webkit-filter: saturate(0.7);
-
+    box-sizing: border-box;
+    
     & img {
         width: 1.5rem;
         margin-bottom: 30px;
     }
-
 
     & .side_link-social {
         display: flex;
@@ -91,20 +94,6 @@ a {
     position: fixed;
     left: 50px;
     bottom: 50px;
-}
-
-
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-    transition: opacity .5s
-}
-
-.slide-fade-enter,
-.slide-fade-leave-to
-/* .fade-leave-active in below version 2.1.8 */
-
-{
-    opacity: 0
 }
 
 @media (width <=768px) {
