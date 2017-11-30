@@ -53,7 +53,7 @@ export default class Header extends Vue {
         & a {
             height: 50px;
             line-height: 50px;
-            padding: 0 0.5em;
+            margin: 0 0.5em;
         }
     }
 

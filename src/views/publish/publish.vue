@@ -30,10 +30,15 @@ export default class Publish extends Vue{
     md: string = ''
     title: string = "欢迎使用markdown编辑器，点击编辑"
     throttleFlag: Boolean = true
+    postUrl: string = '/article'
+    id: string = ''
 
     mounted(){
+        // 两种路由使用不同get post 接口
         const { id } = this.$route.params
         if(id){
+            this.id = id
+            this.postUrl = '/article/update'
             $http('/article/publish', 'get', {id})
                 .then((data: any) => {
                     const { markdown = '', title } = <Articles>data.article
@@ -42,6 +47,8 @@ export default class Publish extends Vue{
                 })
                 .catch( (error: Object) => console.log(error))
         }
+
+        
     }
 
     transMarkdown() {
@@ -65,14 +72,24 @@ export default class Publish extends Vue{
         }
     }
     publishBlog(){
-        const {title, transMarkdown, md} = this
+        const {title, transMarkdown, md, $router, postUrl, id} = this
 
-        $http('article', 'post', {
-            content: transMarkdown(),
-            markdown: md,
-            title
-        })
-        .catch( (error: Object) => console.log(error))
+        $http(postUrl, 'post', {
+                content: transMarkdown(),
+                markdown: md,
+                title,
+                id
+            })
+            .then( (data: any) => {
+                console.log(data)
+                $router.push({
+                    name: 'article',
+                    params: {
+                        id: data.id
+                    }
+                })
+            })
+            .catch( (error: Object) => console.log(error))
     }
 }
 </script>

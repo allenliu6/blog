@@ -22,7 +22,7 @@
                             <i class="fa fa-tag"></i>{{tag}}
                         </span>
                         <button @click="emitEdit(topic._id)">编辑</button>
-                        <button @click="emitDelete(topic._id)">删除</button>
+                        <button @click="emitDelete(topic._id, index)">删除</button>
                         <button @click="emitSetTop">置顶</button>
                         <button @click="emitSetTab">分类</button>
                     </div>
@@ -94,9 +94,14 @@
             })
         }
 
-        emitDelete(id: string){
+        emitDelete(id: string, index: number){
+            const { topics } = this
             $http('/article/delete', 'post', {id})
-                .then((data: object) => console.log(data))
+                .then((data: any) => {
+                    if(data.success){
+                        topics.splice(index, 1)
+                    }
+                })
                 .catch((error: Error) => console.log(error))
         }
 
