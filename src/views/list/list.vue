@@ -7,7 +7,7 @@
             <span class="header_count"><i class="fa fa-commenting"></i> 评论 </span>
         </div>
         <ul class="list">
-            <li :key="index" v-for="(topic, index) in topics" @mouseenter="setShowDetail(index)" @mouseleave="cancelShowDetail(index)">
+            <li :key="index" v-for="(topic, index) in topics" @mouseenter="setShowDetail(index, true)" @mouseleave="setShowDetail(index, false)">
                 <div class="list_item">
                     <router-link class="item_info" :to="{name: 'article', params: {id: topic._id}}" :title="topic.summary">
                         {{topic.title}} 
@@ -30,7 +30,17 @@
             </li>
         </ul>
         <nav>
+            <ul class="pagination">
+                <li>
+                    <router-link :to="{name: 'list', params: { page: page - 1, tab}}"> « </router-link>
+                </li>
+                <li v-for="(item, index) in pages" :key="index">
 
+                </li>
+                <li>
+                    <router-link :to="{name: 'list', params: { page: page + 1, tab}}"> » </router-link>
+                </li>
+            </ul>
         </nav>
     </div>
 </template>
@@ -44,6 +54,7 @@
         page: number
         tab: string
         allPage: number
+        pages: number | string[] = []
         topics: Topic[] = []
         isShowDetail: boolean[] = []
 
@@ -79,12 +90,12 @@
                 });
         }
 
-        setShowDetail(index: number){
-            Vue.set(this.isShowDetail, index, true)
+        setShowDetail(index: number, bool: boolean){
+            Vue.set(this.isShowDetail, index, bool)
         }
 
-        cancelShowDetail(index: number){
-            Vue.set(this.isShowDetail, index, false)
+        updatePages(){
+            // this.pages = 
         }
 
         emitEdit(id: string){
@@ -132,12 +143,17 @@
             width: 25%;
         }
 
-        & .header_pv, .header_count{
+        & .header_pv{
+            width: 15%;
+        } 
+
+        .header_count{
             width: 10%;
         }
     }
 
     .list{
+        margin-bottom: 30px;
 
         &>li{
             padding: 10px 0;
@@ -182,6 +198,18 @@
             content: '';
             height: 100%;
             width: 100%;
+        }
+    }
+
+    .pagination{
+        max-width: 6rem;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2em;
+
+        & li{
+            
         }
     }
 </style>
