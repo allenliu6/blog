@@ -60,6 +60,7 @@ a {
 aside {
     flex: none;
     background: url('img/bg2.jpg') center no-repeat;
+    background-size: cover;
     -webkit-filter: saturate(0.7);
     overflow-y: hidden;
     display: block;

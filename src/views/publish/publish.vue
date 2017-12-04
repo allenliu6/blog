@@ -22,7 +22,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { Articles } from '../article/interface'
-import marked from 'marked'
+import * as marked from 'marked'
 import $http from '@/services'
 
 @Component
