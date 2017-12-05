@@ -29,13 +29,17 @@
                 </transition>
             </li>
         </ul>
-        <nav>
-            <ul class="pagination">
+        <nav class="pagination">
+            <ul class="page_list">
                 <li>
                     <router-link :to="{name: 'list', params: { page: page - 1, tab}}"> « </router-link>
                 </li>
                 <li v-for="(item, index) in pages" :key="index">
-
+                    <router-link v-if="typeof item === 'number'" :to="{name: 'list', params: { page: item, tab}}"> {{item}} </router-link>
+                    <span v-else>{{item}}</span>
+                </li>
+                <li>
+                    <router-link :to="{name: 'list', params: { page: allPage, tab}}"> {{allPage}} </router-link>
                 </li>
                 <li>
                     <router-link :to="{name: 'list', params: { page: page + 1, tab}}"> » </router-link>
@@ -54,7 +58,7 @@
         page: number
         tab: string
         allPage: number
-        pages: number | string[] = []
+        pages: any = []
         topics: Topic[] = []
         isShowDetail: boolean[] = []
 
@@ -95,7 +99,25 @@
         }
 
         updatePages(){
-            // this.pages = 
+            const { page, allPage } = this
+
+            if(page <= 0 || allPage <=0) {
+                throw new Error(`page is limitless. page: ${page}, allPage: ${allPage}`)
+            }
+
+            if(page === allPage) {
+                this.pages = ['...', page - 1, page]
+            } else if(page < allPage) {
+                if(page < allPage - 2) {
+                    this.pages = [page - 1, page, '...']
+                } else {
+                    const newPages = [page - 1]
+                    for (let i = page; i < allPage; i++) {
+                        newPages.push(i)
+                    }
+                    this.pages = newPages
+                }
+            }
         }
 
         emitEdit(id: string){
@@ -204,12 +226,17 @@
     .pagination{
         max-width: 6rem;
         margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        font-size: 1.2em;
 
-        & li{
-            
+        & .page_list {
+            // 未生效
+            min-width: 1rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2em;
+
+            & li{
+                
+            }   
         }
     }
 </style>
