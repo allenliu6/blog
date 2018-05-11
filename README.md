@@ -3,16 +3,16 @@
 > allen's blog supported by vue2.5
 
 ## 技术栈
-vue2.5 + typescript   配置略麻烦，在个人csdn博客中有相关介绍
-vue-router   项目尚未优化 目前钩子使用较少
-vuex（项目复杂度有限暂时不使用） 
-axios   官方推荐库，比较好用，本身使用有限，尚可以优化
-marked  markdown解析库
-mockjs  mock数据，添加TS后失效，服务端建设跟进所以暂未修复
-font-awesome  优秀的图标库，可以不再维护了
-vue-cli  进行了一定编译优化  目前编译速度较慢，可能是TS原因
-postcss
-另外[后端 repository](https://github.com/allenliu6/blog-server)
+vue2.5 + typescript   配置略麻烦，在个人csdn博客中有相关介绍  
+vue-router   项目尚未优化 目前钩子使用较少   
+vuex（项目复杂度有限暂时不使用）    
+axios   官方推荐库，比较好用，本身使用有限，尚可以优化  
+marked  markdown解析库  
+mockjs  mock数据，添加TS后失效，服务端建设跟进所以暂未修复  
+font-awesome  优秀的图标库，可惜不再维护了  
+vue-cli  进行了一定编译优化  目前编译速度较慢，可能是TS原因  
+postcss  
+另外[后端 repository](https://github.com/allenliu6/blog-server)  
 
 ## 当前目录结构
 - assets  存放公共静态资源 暂有三类文件 img font css
